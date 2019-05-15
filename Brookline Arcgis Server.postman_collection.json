@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "ad4c1043-c43a-47f9-9272-9acb64449c63",
+		"name": "Brookline Arcgis Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find Address Candidates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://gisweb.brooklinema.gov/arcgis/rest/services/Composite_WhereAmI/GeocodeServer/findAddressCandidates?SingleLine=333 washington st&f=json&outFields=Loc_name, Score, Match_addr&outSR=4326",
+					"protocol": "http",
+					"host": [
+						"gisweb",
+						"brooklinema",
+						"gov"
+					],
+					"path": [
+						"arcgis",
+						"rest",
+						"services",
+						"Composite_WhereAmI",
+						"GeocodeServer",
+						"findAddressCandidates"
+					],
+					"query": [
+						{
+							"key": "SingleLine",
+							"value": "333 washington st"
+						},
+						{
+							"key": "f",
+							"value": "json"
+						},
+						{
+							"key": "outFields",
+							"value": "Loc_name, Score, Match_addr"
+						},
+						{
+							"key": "outSR",
+							"value": "4326"
+						},
+						{
+							"key": "outSR",
+							"value": "102100",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Brookline Features Server",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d7ef5470-23fc-47f0-9811-543bae394b15",
+						"exec": [
+							"const busStopsId = 0;",
+							"const railroadStationsId = 1;",
+							"const historicLandmarksId = 2;",
+							"const parkRecreationId = 3;",
+							"const recyclingFacilityId = 4;",
+							"const publicWorksId = 5;",
+							"const museumsId = 6;",
+							"const communityCentersId = 7;",
+							"const postOfficeId = 8;",
+							"const libraryId = 9;",
+							"const policeStationId = 10;",
+							"const fireStationsId = 11;",
+							"const trashPickupId = 12;",
+							"const recyclingPickupId = 13;",
+							"const streetCleaningId = 14;",
+							"const yardWastePickupId = 15;",
+							"const schoolDistrictsId = 16;",
+							"const schoolBufferZonesId = 17;",
+							"const zoningDistrictsId = 18;",
+							"const historicDistrictsId = 19;",
+							"const votingPrecinctsId = 20;",
+							"const pollingPlacesId = 21;",
+							"pm.environment.set(\"feature_id\", policeStationId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "f",
+							"value": "json",
+							"type": "text"
+						},
+						{
+							"key": "where",
+							"value": "1=1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "returnGeometry",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "spatialRel",
+							"value": "esriSpatialRelIntersects",
+							"type": "text"
+						},
+						{
+							"key": "geometryType",
+							"value": "esriGeometryPoint",
+							"type": "text"
+						},
+						{
+							"key": "inSR",
+							"value": "102100",
+							"type": "text"
+						},
+						{
+							"key": "outFields",
+							"value": "*",
+							"type": "text"
+						},
+						{
+							"key": "outSR",
+							"value": "102100",
+							"type": "text"
+						},
+						{
+							"key": "geometry",
+							"value": "[-7917110.5728258491,5211146.1664032871]",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "geometry",
+							"value": "{\"x\":-71.120614336337198,\"y\":42.334020535512529,\"z\":0,\"spatialReference\":{\"wkid\":4326,\"latestWkid\":4326}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://gisweb.brooklinema.gov/arcgis/rest/services/MyGov/GovernmentServices/MapServer/{{feature_id}}/query?Content-Type=application/x-www-form-urlencoded",
+					"protocol": "http",
+					"host": [
+						"gisweb",
+						"brooklinema",
+						"gov"
+					],
+					"path": [
+						"arcgis",
+						"rest",
+						"services",
+						"MyGov",
+						"GovernmentServices",
+						"MapServer",
+						"{{feature_id}}",
+						"query"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/x-www-form-urlencoded"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
